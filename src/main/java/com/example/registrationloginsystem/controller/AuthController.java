@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Controller
 @AllArgsConstructor
 public class AuthController {
@@ -34,15 +36,22 @@ public class AuthController {
     @PostMapping("/add/save")
     public String  registration(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result, Model model){
         User existing = userServiceImpl.findByEmail(userDto.getEmail());
-        if (existing != null){
+        if (existing != null && existing.getEmail() != null && !existing.getEmail().isEmpty()){
             result.rejectValue("email", null, "There is already an account registered with that email");
         }
         if (result.hasErrors()){
             model.addAttribute("user", userDto);
-            return "/add";
+            return "register-user";
         }
         userServiceImpl.saveUser(userDto);
         return "redirect:/add?success";
+    }
+
+    @GetMapping("/users")
+    public String listUsers(Model model){
+        List<UserDto> listUsers = userServiceImpl.findAll();
+        model.addAttribute("listUsers", listUsers);
+        return "users";
     }
 
 }
