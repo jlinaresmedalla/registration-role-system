@@ -30,27 +30,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>Create Student</h2>
-        </div>
-        <div class="card-body">
-            <form method="post" role="form" th:action="@{all}" th:object="${student}">
-                <div class="form-group mb-3">
-                    <label class="form-label" for="firstName">Student First name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control" th:field="*{firstName}" placeholder="Enter first name" />
-                    <p th:if="${#fields.hasErrors('firstName')}" class="text-danger" th:errors="*{firstName}"></p>
-                </div>
-                <div class="form-group mb-3">
-                    <label class="form-label" for="lastName">Student Last name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control" th:field="*{lastName}" placeholder="Enter last name" />
-                    <p th:if="${#fields.hasErrors('lastName')}" class="text-danger" th:errors="*{lastName}"></p>
-                </div>
-                <div class="form-group mb-3">
-                    <label class="form-label" for="email">Student email</label>
-                    <input type="email" id="email" name="email" class="form-control" th:field="*{email}" placeholder="Enter email" />
-                    <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></p>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            <h1 class="text-center">Registration and Login System</h1>
         </div>
     </div>
 </div>

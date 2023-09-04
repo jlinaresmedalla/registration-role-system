@@ -1,5 +1,6 @@
 package com.example.registrationloginsystem.entity;
 
+import com.example.registrationloginsystem.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String username;
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
@@ -33,5 +36,12 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
     )
     List<Role> roles = new ArrayList<>();
+
+    public User(UserDto userDto) {
+        this.firstName = userDto.getFirstName();
+        this.lastName = userDto.getLastName();
+        this.email = userDto.getEmail();
+        this.password = userDto.getPassword();
+    }
 
 }
