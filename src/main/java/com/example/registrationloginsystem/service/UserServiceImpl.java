@@ -6,6 +6,7 @@ import com.example.registrationloginsystem.entity.User;
 import com.example.registrationloginsystem.repository.RoleRepository;
 import com.example.registrationloginsystem.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -18,10 +19,12 @@ public class UserServiceImpl implements UserService{
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void saveUser(UserDto userDto) {
         User newUser = new User(userDto);
+        newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
         Role checkedRole = checkRole("ROLE_ADMIN");
         newUser.setRoles(Arrays.asList(checkedRole));
         userRepository.save(newUser);

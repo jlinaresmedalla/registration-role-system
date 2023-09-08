@@ -26,6 +26,11 @@ public class AuthController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public  String login(){
+        return "login";
+    }
+
     @GetMapping("/add")
     public  String showRegistrationForm(Model model){
         UserDto userDto = new UserDto();
@@ -53,5 +58,6 @@ public class AuthController {
         model.addAttribute("listUsers", listUsers);
         return "users";
     }
+
 
 }
